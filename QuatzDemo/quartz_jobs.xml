@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+  
+  <schedule>
+    <job>
+      <name>PrintJob</name>
+      <group>OutPut</group>
+      <description></description>
+      <!--
+      任务类型，任务的具体类型及所属程序集，格式：实现了IJob接口的包含完整命名空间的类名,程序集名称，
+      如:<job-type>Quartz.Server.SampleJob, Quartz.Server</job-type>
+      -->
+      <job-type>QuartzDemo.PrintJob,QuartzDemo</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    
+    <!--一个trigger只能对应一个job,但是一个job可以对应多个trigger-->
+    <trigger>
+      <cron>
+        <name>PrintJob</name>
+        <group>OutPut</group>
+        <job-name>PrintJob</job-name>
+        <job-group>OutPut</job-group>
+        <start-time>2015-01-22T00:00:00+08:00</start-time>
+        <cron-expression>0/3 * * * * ?</cron-expression>
+      </cron>
+      
+    </trigger>
+  </schedule>
+</job-scheduling-data>
+
